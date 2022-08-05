@@ -1,0 +1,6 @@
+/* index page css */
+.like{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}

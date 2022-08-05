@@ -1,0 +1,16 @@
+/* register page css */
+
+.container form{
+    margin-top:30px;
+    margin-left: 30%;
+    width: 40%;
+    border:1px solid lightgray;
+    padding:10px;
+}
+.container input{
+    border:none;
+    border-radius: 10px;
+    width: 100%;
+    padding:10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
