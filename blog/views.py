@@ -1,21 +1,19 @@
-# from django.shortcuts import render, redirect
-# from django.http import HttpResponseRedirect
-# from django.contrib.auth import authenticate, login, logout
-# from django.contrib import messages
-# from django.contrib.auth.forms import AuthenticationForm
-# from .forms import RegisterForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm
+from .models import BlogModel
+
 
 
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'blog/index.html', {})
+        posts = BlogModel.objects.all()
+
+        return render(request, 'blog/index.html', {'posts': posts})
     else:
         return HttpResponseRedirect('/login/')
 

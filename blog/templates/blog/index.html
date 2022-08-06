@@ -5,21 +5,26 @@
 <div class="container mt-5">
     <center><h1>Blogs Based On My Interest</h1></center>
     <div class="row ">
-        <div class="col-4 mt-3">
-            <div class="card shadow" style="width: 18rem;">
-                <img src="{% static 'blog/images/quad.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <div class="like">
-                    <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
-                    <a href="#" class="btn btn-sm btn-primary">Read More</a>
-                    <a href="#" class="btn btn-sm btn-outline-success">comment</a>
-                 </div>
+        {% for Blog in posts %}
+            <div class="col-4 mt-3">
+                <div class="card shadow" style="width: 18rem;">
+                    <img src="{% static 'blog/images/quad.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" style="text-transform:uppercase;">"{{Blog.title}}"</h5>
+                    <p class="card-text">{{Blog.content}}</p>
+                   <div class="d-flex justify-content-end">
+                    <em><small>{{Blog.created_at}}</small></em> <br>
+                   </div>
+                    <div class="like">
+                        <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
+                        <a href="#" class="btn btn-sm btn-primary">Read More</a>
+                        <a href="#" class="btn btn-sm btn-outline-success">comment</a>
+                    </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        {% endfor %}
+<!-- 
         <div class="col-4 mt-3">
             <div class="card shadow" style="width: 18rem;">
                 <img src="{%static 'blog/images/dirt.jpg' %}" class="card-img-top" alt="...">
@@ -33,9 +38,9 @@
                  </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-4 mt-3">
+        <!-- <div class="col-4 mt-3">
             <div class="card shadow" style="width: 18rem;">
                 <img src="{%static 'blog/images/motogp.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -48,9 +53,8 @@
                  </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!--  -->
     </div>
 </div>
 {% endblock %}
