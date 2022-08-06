@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
+from .forms import RegisterForm, BlogModelForm
 from .models import BlogModel
 
 
@@ -69,4 +69,17 @@ def detail(request):
     else:
         return HttpResponseRedirect('/login/')
 
-    
+def addblog(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = BlogModelForm(request.POST)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.author = request.user
+                instance.save()
+                return redirect('index')
+        else:
+            form = BlogModelForm()
+        return render(request, 'blog/addblog.html', {'form':form})
+    else:
+        return HttpResponseRedirect('/login/')

@@ -3,57 +3,33 @@
 
 {% block content %}
 <div class="container mt-5">
-    <center><h1>Blogs Based On My Interest</h1></center>
+    <center>
+        <h1>Blogs Based On My Interest</h1>
+        <button class="btn btn-sm btn-info ">
+            <a href="{%url 'add-blog' %}" class="text-white" style="text-decoration:none;">Add Blog</a>
+        </button>
+    </center>
+    
     <div class="row ">
         {% for Blog in posts %}
             <div class="col-4 mt-3">
                 <div class="card shadow" style="width: 18rem;">
                     <img src="{% static 'blog/images/quad.jpg' %}" class="card-img-top" alt="...">
                     <div class="card-body">
-                    <h5 class="card-title" style="text-transform:uppercase;">"{{Blog.title}}"</h5>
-                    <p class="card-text">{{Blog.content}}</p>
+                    <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{Blog.title}}"</h5> <hr>
+                    <p class="card-text">{{ Blog.content|truncatechars:100 }}</p> <hr>
                    <div class="d-flex justify-content-end">
-                    <em><small>{{Blog.created_at}}</small></em> <br>
+                    <em><small>By:'{{Blog.author}}'' on {{Blog.created_at}}</small></em><br>
                    </div>
-                    <div class="like">
+                    <div class="like" style="gap:30px;">
                         <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
-                        <a href="#" class="btn btn-sm btn-primary">Read More</a>
+                        <a href="{%url 'detail-view' %}" class="btn btn-sm btn-primary">Read More</a>
                         <a href="#" class="btn btn-sm btn-outline-success">comment</a>
                     </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
-<!-- 
-        <div class="col-4 mt-3">
-            <div class="card shadow" style="width: 18rem;">
-                <img src="{%static 'blog/images/dirt.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <div class="like">
-                    <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
-                    <a href="#" class="btn btn-sm btn-primary">Read More</a>
-                    <a href="#" class="btn btn-sm btn-outline-success">comment</a>
-                 </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="col-4 mt-3">
-            <div class="card shadow" style="width: 18rem;">
-                <img src="{%static 'blog/images/motogp.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                 <div class="like">
-                    <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
-                    <a href="{%url 'detail-view' %}" class="btn btn-sm btn-primary">Read More</a>
-                    <a href="#" class="btn btn-sm btn-outline-success">comment</a>
-                 </div>
-                </div>
-            </div>
-        </div> -->
 
     </div>
 </div>
