@@ -3,6 +3,7 @@ from django.utils.timezone import now
 from django.contrib.auth.models import User
 from froala_editor.fields import FroalaField
 from .helpers import *
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 
@@ -24,3 +25,13 @@ class BlogModel(models.Model):
     def save(self, *args, **kwargs):
         self.slug = generate_slug(self.title)
         super(BlogModel, self).save(*args, **kwargs)
+
+
+# model for the user
+class ProfileModel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profilemodel")
+    image = models.ImageField(default='default.png', upload_to="blog/images/profile", validators=[FileExtensionValidator(['png','jpg'])])
+    #biography thapera models pani banaune
+
+    def __str__(self):
+        return self.user.username

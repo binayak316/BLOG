@@ -4,3 +4,9 @@
     justify-content:center;
     gap:10px;
 }
+.profilepicture{
+    border: none;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+}

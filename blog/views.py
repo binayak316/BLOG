@@ -4,7 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm, BlogModelForm
-from .models import BlogModel
+from .models import BlogModel, ProfileModel
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -83,3 +85,10 @@ def addblog(request):
         return render(request, 'blog/addblog.html', {'form':form})
     else:
         return HttpResponseRedirect('/login/')
+
+@login_required(login_url = 'login-user')
+def profile(request):
+    # instance = ProfileModel.objects.filter()
+    # data = ProfileModel.objects.filter()
+    # return render(request, 'blog/profile.html', {'data':data})
+    return render(request, 'blog/profile.html',{})
