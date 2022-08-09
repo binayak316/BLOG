@@ -13,7 +13,7 @@ class BlogModel(models.Model):
     content = FroalaField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=1000, null=True, blank=True)
-    image = models.ImageField(upload_to='blog/images') # media url paxi blog/images create garxa ra tes vitra store hunxa photos
+    image = models.ImageField(upload_to='blog/images', null=True, blank=True) # media url paxi blog/images create garxa ra tes vitra store hunxa photos
     created_at = models.DateTimeField(auto_now_add=True)
 
 

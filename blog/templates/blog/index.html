@@ -12,8 +12,8 @@
     
     <div class="row ">
         {% for Blog in posts %}
-            <div class="col-4 mt-3">
-                <div class="card shadow" style="width: 18rem;">
+            <div class="col-4 mt-3 mb-5">
+                <div class="card shadow" style="width: 20rem;">
                     {% if Blog.image %}
                     <img src="{{ Blog.image.url }}" class="card-img-top" alt="..." height="200" width="200" style="object-fit:cover;padding:10px;">
                     {% endif %}
