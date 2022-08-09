@@ -1,7 +1,6 @@
-from logging import PlaceHolder
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import BlogModel
+from .models import BlogModel, ProfileModel
 from django import forms
 
 
@@ -16,3 +15,9 @@ class BlogModelForm(forms.ModelForm):
     class Meta:
         model = BlogModel
         fields = ['title', 'content']#image ne rakhne
+
+class ProfileModelForm(forms.ModelForm):
+    bio = forms.CharField(widget=forms.Textarea(attrs={'rows':5,'placeholder':'Update your Bio'}))
+    class Meta:
+        model = ProfileModel
+        fields = ['bio',]

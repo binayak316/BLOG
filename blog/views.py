@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm, BlogModelForm
+from .forms import RegisterForm, BlogModelForm, ProfileModelForm
 from .models import BlogModel, ProfileModel
 from django.contrib.auth.decorators import login_required
 
@@ -14,7 +14,6 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     if request.user.is_authenticated:
         posts = BlogModel.objects.all()
-
         return render(request, 'blog/index.html', {'posts': posts})
     else:
         return HttpResponseRedirect('/login/')
@@ -76,7 +75,7 @@ def addblog(request):
         if request.method == "POST":
             form = BlogModelForm(request.POST)
             if form.is_valid():
-                instance = form.save(commit=False)
+                instance = form.save(commit=False)#reload garda submission vanera na aauna ko lagi(auto save huntheo hatako)
                 instance.author = request.user
                 instance.save()
                 return redirect('index')
@@ -89,4 +88,22 @@ def addblog(request):
 @login_required(login_url = 'login-user')
 def profile(request):
     myblogs = BlogModel.objects.filter(author=request.user)
-    return render(request, 'blog/profile.html',{'myblogs':myblogs})
+    form = ProfileModelForm()
+    context = {
+        'myblogs':myblogs,
+        'form':form,
+    }
+    return render(request, 'blog/profile.html',context)
+
+# def addprofile(request):
+#     if request.method == "POST":
+#         form = ProfileModelForm(request.POST)
+#         if form.is_valid():
+#             instance = form.save(commit=False)
+#             instance.author = request.user
+#             instance.save()
+#             return redirect('profile')
+#     else:
+#         form = ProfileModelForm()
+#     return render(request, 'blog/profile.html',{'form':form})
+   

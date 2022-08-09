@@ -14,8 +14,10 @@
         {% for Blog in posts %}
             <div class="col-4 mt-3">
                 <div class="card shadow" style="width: 18rem;">
-                    <img src="{% static 'blog/images/quad.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
+                    {% if Blog.image %}
+                    <img src="{{ Blog.image.url }}" class="card-img-top" alt="..." height="200" width="200" style="object-fit:cover;padding:10px;">
+                    {% endif %}
+                    <div class="card-body" style="padding:10px;">
                     <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{Blog.title}}"</h5> <hr>
                     <p class="card-text">{{ Blog.content|truncatechars:100 }}</p> <hr>
                    <div class="d-flex justify-content-end">

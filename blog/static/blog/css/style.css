@@ -6,7 +6,8 @@
 }
 .profilepicture{
     border: none;
-    border-radius: 50%;
+    border-radius: 50%; 
+    /* this is not working i gave bootstrap class for this rounded image which is rounded-circle z-depth-2 */
     height: 150px;
     object-fit:cover;
     width: 150px;
