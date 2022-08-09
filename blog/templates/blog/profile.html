@@ -3,31 +3,47 @@
 
 {% block content %}
 <div class="container-fluid d-flex mt-5">
-    <div class="col-4 shadow">
+    <div class="col-4 shadow leftcolumn" style="height:150px; border: none;">
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-4 ">
+                    <div class="col-4 " style="object-fit:cover;">
                         <img src="{{user.profilemodel.image.url}}" alt="profile-picture" class="profilepicture">
                     </div>
-                    <div class="col-8">
+                    <div class="col-7 boxme">
                         <span>Name: {{user.username}}</span> <br>
                         <span>Email: {{user.email}}</span> <br>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#profileupdate">
-                          Edit Profile
-                          </button>
+                        <small>BIO:{{user.profilemodel.bio }}</small> <br>
+                        <span class="d-flex justify-content-center"><button type="button" class="btn btn-primary btn-sm mt-4 shadow mb-2" data-toggle="modal" data-target="#profileupdate">Edit Profile</button></span>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-6 offset-1 shadow">
-        <div class="card">
-            <div class="card-body">
-                This is blog side add by authentic user
+   
+    <div class="d-flex flex-column col-6 offset-1 shadow p-5">
+      {% for blog in myblogs %}
+        <div class="card mt-4 box-shadow-for-me" >
+          <img src="{% static 'blog/images/quad.jpg' %}" class="card-img-top" alt="..." height="450" width="100">
+          <div class="card-body">
+            <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{blog.title}}"</h5>
+            <hr>
+            <p class="card-text">{{ blog.content|truncatechars:100 }}</p>
+            <hr>
+            <div class="d-flex justify-content-end">
+              <em><small>By:'{{blog.author}}'' on {{blog.created_at}}</small></em><br>
             </div>
-        </div>
+            <div class="like" style="gap:30px;">
+              <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
+              <a href="{%url 'detail-view' %}" class="btn btn-sm btn-primary">Read More</a>
+              <a href="#" class="btn btn-sm btn-outline-success">comment</a>
+            </div>
+          </div>
+        </div> 
+        {% endfor %}   
     </div>
+    
 </div>
 
 
@@ -44,7 +60,7 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>

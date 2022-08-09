@@ -88,7 +88,5 @@ def addblog(request):
 
 @login_required(login_url = 'login-user')
 def profile(request):
-    # instance = ProfileModel.objects.filter()
-    # data = ProfileModel.objects.filter()
-    # return render(request, 'blog/profile.html', {'data':data})
-    return render(request, 'blog/profile.html',{})
+    myblogs = BlogModel.objects.filter(author=request.user)
+    return render(request, 'blog/profile.html',{'myblogs':myblogs})
