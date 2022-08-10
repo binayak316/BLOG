@@ -2,18 +2,18 @@
 {%load static %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-2">
     <center>
-        <h1>Blogs Based On My Interest</h1>
-        <button class="btn btn-sm btn-info ">
+        <!-- <h1> रुचि को विषयहरु :</h1> -->
+        <button class="btn  btn-info mb-2">
             <a href="{%url 'add-blog' %}" class="text-white" style="text-decoration:none;">Add Blog</a>
         </button>
     </center>
     
-    <div class="row ">
+    <div class="row sidebarscroll" style="overflow-y:scroll;height:770px;box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
         {% for Blog in posts %}
-            <div class="col-4 mt-3 mb-5">
-                <div class="card shadow" style="width: 20rem;">
+            <div class="col-4 mt-3 mb-2 p-3">
+                <div class="card shadow" style="width: 25rem;">
                     {% if Blog.image %}
                     <img src="{{ Blog.image.url }}" class="card-img-top" alt="..." height="200" width="200" style="object-fit:cover;padding:10px;">
                     {% endif %}

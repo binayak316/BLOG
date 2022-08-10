@@ -16,3 +16,12 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
 }
+.sidebarscroll::-webkit-scrollbar {
+    display: none;
+  }
+.title{
+    color:rgb(63, 192, 231);
+}
+.conflu{
+    width:80%;
+}
