@@ -10,7 +10,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-4 " style="object-fit:cover;">
+                        
+                        {% if user.profilemodel.image %}
                         <img src="{{user.profilemodel.image.url}}" alt="profile-picture" class="profilepicture rounded-circle z-depth-5">
+                        {% else %}
+                        <img src="{% static 'blog/images/default.png' %}" alt="default png"  class="profilepicture rounded-circle z-depth-5">
+                        {% endif %}
                     </div>
                     <div class="col-7 boxme">
                         <span>Name: {{user.username}}</span> <br>

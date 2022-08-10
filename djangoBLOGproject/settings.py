@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'froala_editor',
-    'blog',
+    'blog.apps.BlogConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    # 'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -128,9 +129,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 MEDIA_URL = '/media/' #url dekhine hoo
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'blog/media/')

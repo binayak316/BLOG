@@ -94,16 +94,3 @@ def profile(request):
         'form':form,
     }
     return render(request, 'blog/profile.html',context)
-
-# def addprofile(request):
-#     if request.method == "POST":
-#         form = ProfileModelForm(request.POST)
-#         if form.is_valid():
-#             instance = form.save(commit=False)
-#             instance.author = request.user
-#             instance.save()
-#             return redirect('profile')
-#     else:
-#         form = ProfileModelForm()
-#     return render(request, 'blog/profile.html',{'form':form})
-   

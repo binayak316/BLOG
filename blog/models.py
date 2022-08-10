@@ -31,7 +31,7 @@ class BlogModel(models.Model):
 # model for the user
 class ProfileModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profilemodel")
-    image = models.ImageField(default='default.png', upload_to="blog/images/profile", validators=[FileExtensionValidator(['png','jpg'])])
+    image = models.ImageField( upload_to="blog/images/profile", validators=[FileExtensionValidator(['png','jpg'])])
     bio = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
