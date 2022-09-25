@@ -20,7 +20,7 @@
                     <div class="col-7 boxme">
                         <span>Name: {{user.username}}</span> <br>
                         <span>Email: {{user.email}}</span> <br>
-                        <small>BIO:{{user.profilemodel.bio }}</small> <br>
+                        <small style="text-transform:capitalize">BIO:{{user.profilemodel.bio }}</small> <br>
                         <span class="d-flex justify-content-center"><button type="button" class="btn btn-primary btn-sm mt-4 shadow mb-2" data-toggle="modal" data-target="#profileupdate">Edit Profile</button></span>
                     </div>
                     
@@ -41,12 +41,13 @@
             <p class="card-text">{{ blog.content|truncatechars:100 }}</p>
             <hr>
             <div class="d-flex justify-content-end">
-              <em><small>By:'{{blog.author}}'' on {{blog.created_at}}</small></em><br>
+              <em><small>By:'{{blog.author}}' on {{blog.created_at}}</small></em><br>
             </div>
             <div class="like" style="gap:30px;">
               <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
               <a href="{%url 'detail-view' %}" class="btn btn-sm btn-primary">Read More</a>
               <a href="#" class="btn btn-sm btn-outline-success">comment</a>
+              <input type="submit" class="btn btn-sm btn-danger" value="Delete">
             </div>
           </div>
         </div> 
