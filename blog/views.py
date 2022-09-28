@@ -73,7 +73,7 @@ def detail(request):
 def addblog(request):
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = BlogModelForm(request.POST)
+            form = BlogModelForm(request.POST or None, request.FILES or None)
             if form.is_valid():
                 instance = form.save(commit=False)#reload garda submission vanera na aauna ko lagi(auto save huntheo hatako)
                 instance.author = request.user
@@ -88,7 +88,13 @@ def addblog(request):
 @login_required(login_url = 'login-user')
 def profile(request):
     myblogs = BlogModel.objects.filter(author=request.user)
-    form = ProfileModelForm()
+    if request.method == "POST":
+        form = ProfileModelForm( request.POST or None, request.FILES or None, instance=request.user.profilemodel )
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileModelForm(instance=request.user.profilemodel)
     context = {
         'myblogs':myblogs,
         'form':form,

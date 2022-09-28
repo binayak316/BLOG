@@ -14,10 +14,10 @@ class BlogModelForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={'rows':5,'placeholder':'Write Your Blog or an Article....'}))
     class Meta:
         model = BlogModel
-        fields = ['title', 'content']#image ne rakhne
+        fields = ['title', 'content','image']#image ne rakhne
 
 class ProfileModelForm(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea(attrs={'rows':5,'placeholder':'Update your Bio'}))
     class Meta:
         model = ProfileModel
-        fields = ['bio',]
+        fields = ['image','bio'] #image in upload huna paryo profile picture
