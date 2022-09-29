@@ -24,7 +24,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    path('froala_editor/',include('froala_editor.urls'))
+    path('froala_editor/',include('froala_editor.urls')),
+    path('admin/clearcache/', include('clearcache.urls')),
 ] 
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

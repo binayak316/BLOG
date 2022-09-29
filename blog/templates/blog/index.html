@@ -21,11 +21,17 @@
                     <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{Blog.title}}"</h5> <hr>
                     <p class="card-text">{{ Blog.content|truncatechars:100 }}</p> <hr>
                    <div class="d-flex justify-content-end">
-                    <em><small>By:'{{Blog.author}}'' on {{Blog.created_at}}</small></em><br>
+                    {% if Blog.author.profilemodel.image %}
+                    <img src="{{Blog.author.profilemodel.image.url}}" alt="profile" style="height:20px;width:20px;border-radius:50%;">
+                    {% else %}
+                    <img src="{% static 'blog/images/default.png' %}" alt="default png" style="height:20px;width:20px;border-radius:50%;">
+                    {% endif %}
+                    <em><small> &nbsp;By:'{{ Blog.author }}' on {{ Blog.created_at }}</small></em><br>
+
                    </div>
                     <div class="like" style="gap:30px;">
                         <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
-                        <a href="{%url 'detail-view' %}" class="btn btn-sm btn-primary">Read More</a>
+                        <a href="{% url 'detail-view' Blog.id %}" class="btn btn-sm btn-primary">Read More</a>
                         <a href="#" class="btn btn-sm btn-outline-success">comment</a>
                     </div>
                     </div>

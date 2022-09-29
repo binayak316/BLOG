@@ -64,9 +64,13 @@ def logoutUser(request):
 
 
 
-def detail(request):
+def detail(request, pk):
     if request.user.is_authenticated:
-        return render(request, 'blog/detail.html', {})
+        post = BlogModel.objects.filter(id=pk)
+        context = {
+            'post': post,
+        }
+        return render(request, 'blog/detail.html', context)
     else:
         return HttpResponseRedirect('/login/')
 
