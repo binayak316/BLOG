@@ -5,84 +5,90 @@
 
 {% block content %}
 <div class="container-fluid d-flex mt-5">
-    <div class="col-4 shadow leftcolumn" style="height:150px; border: none;">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4 " style="object-fit:cover;">
-                        
-                        {% if user.profilemodel.image %}
-                        <img src="{{user.profilemodel.image.url}}" alt="profile-picture" class="profilepicture rounded-circle z-depth-5">
-                        {% else %}
-                        <img src="{% static 'blog/images/default.png' %}" alt="default png"  class="profilepicture rounded-circle z-depth-5">
-                        {% endif %}
-                    </div>
-                    <div class="col-7 boxme">
-                        <span>Name: {{user.username}}</span> <br>
-                        <span>Email: {{user.email}}</span> <br>
-                        <small style="text-transform:capitalize">BIO:{{user.profilemodel.bio }}</small> <br>
-                        <span class="d-flex justify-content-center"><button type="button" class="btn btn-primary btn-sm mt-4 shadow mb-2" data-toggle="modal" data-target="#profileupdate">Edit Profile</button></span>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-   
-    <div class="d-flex flex-column col-6 offset-1 shadow p-5" style="overflow-y: scroll;height:750px;border-radius:20px;">
-      {% for blog in myblogs %}
-        <div class="card mt-4 box-shadow-for-me" style=" box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;float: right;" >
-          {% if blog.image %}
-          <img src="{{blog.image.url}}" class="card-img-top" alt="..." height="450" width="100" style="object-fit:cover;padding:10px;">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{blog.title}}"</h5>
-            <hr>
-            <p class="card-text">{{ blog.content|truncatechars:100 }}</p>
-            <hr>
-            <div class="d-flex justify-content-end">
-              <em><small>By:'{{blog.author}}' on {{blog.created_at}}</small></em><br>
-            </div>
-            <div class="like" style="gap:30px;">
-              <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
-              <a href="{% url 'detail-view' blog.id %}" class="btn btn-sm btn-primary">Read More</a>
-              <a href="#" class="btn btn-sm btn-outline-success">comment</a>
-              <input type="submit" class="btn btn-sm btn-danger" value="Delete">
-            </div>
+  <div class="col-4 shadow leftcolumn" style="height:150px; border: none;">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4 " style="object-fit:cover;">
+
+            {% if user.profilemodel.image %}
+            <img src="{{user.profilemodel.image.url}}" alt="profile-picture"
+              class="profilepicture rounded-circle z-depth-5">
+            {% else %}
+            <img src="{% static 'blog/images/default.png' %}" alt="default png"
+              class="profilepicture rounded-circle z-depth-5">
+            {% endif %}
           </div>
-        </div> 
-        {% endfor %}   
+          <div class="col-7 boxme">
+            <span>Name: {{user.username}}</span> <br>
+            <span>Email: {{user.email}}</span> <br>
+            <small style="text-transform:capitalize">BIO:{{user.profilemodel.bio }}</small> <br>
+            <span class="d-flex justify-content-center"><button type="button"
+                class="btn btn-primary btn-sm mt-4 shadow mb-2" data-toggle="modal" data-target="#profileupdate">Edit
+                Profile</button></span>
+          </div>
+
+        </div>
+      </div>
     </div>
-    
+  </div>
+
+  <div class="d-flex flex-column col-6 offset-1 shadow p-5" style="overflow-y: scroll;height:750px;border-radius:20px;">
+    {% for blog in myblogs %}
+    <div class="card mt-4 box-shadow-for-me" style=" box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;float: right;">
+      {% if blog.image %}
+      <img src="{{blog.image.url}}" class="card-img-top" alt="..." height="450" width="100"
+        style="object-fit:cover;padding:10px;">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{blog.title}}"</h5>
+        <hr>
+        <p class="card-text">{{ blog.content|truncatechars:100 }}</p>
+        <hr>
+        <div class="d-flex justify-content-end">
+          <em><small>By:'{{blog.author}}' on {{blog.created_at}}</small></em><br>
+        </div>
+        <div class="like" style="gap:30px;">
+          <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
+          <a href="{% url 'detail-view' blog.id %}" class="btn btn-sm btn-primary">Read More</a>
+          <a href="#" class="btn btn-sm btn-outline-success">comment</a>
+          <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
 </div>
 
 
 
 <!-- bootstrap modal for update profile -->
 <!-- Modal -->
-<div class="modal fade" id="profileupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div class="body shadow" style="border-radius:10px;">
-              <form action="" method="post" enctype="multipart/form-data" style="padding:10px;">
-                {% csrf_token %}
-                {{ form | crispy}}
-                  <!-- <button type="reset" class="btn btn-secondary btn-sm" data-dismiss="modal" >Cancel</button> -->
-                  <input type="reset" class="btn btn-secondary btn-sm" value="Cancel">
-                  <input type="submit" class="btn btn-info btn-sm" value="Update Profile" style="float:right;">
-              </form>
-            </div>
+<div class="modal fade" id="profileupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="body shadow" style="border-radius:10px;">
+            <form action="" method="post" enctype="multipart/form-data" style="padding:10px;">
+              {% csrf_token %}
+              {{ form | crispy}}
+              <!-- <button type="reset" class="btn btn-secondary btn-sm" data-dismiss="modal" >Cancel</button> -->
+              <input type="reset" class="btn btn-secondary btn-sm" value="Cancel">
+              <input type="submit" class="btn btn-info btn-sm" value="Update Profile" style="float:right;">
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

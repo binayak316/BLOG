@@ -9,34 +9,41 @@
             <a href="{%url 'add-blog' %}" class="text-white" style="text-decoration:none;">Add Blog</a>
         </button>
     </center>
-    
-    <div class="row sidebarscroll" style="overflow-y:scroll;height:770px;box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
-        {% for Blog in posts %}
-            <div class="col-4 mt-3 mb-2 p-3">
-                <div class="card shadow" style="width: 25rem;">
-                    {% if Blog.image %}
-                    <img src="{{ Blog.image.url }}" class="card-img-top" alt="..." height="200" width="200" style="object-fit:cover;padding:10px;background-position: center;background-size: cpver;">
-                    {% endif %}
-                    <div class="card-body" style="padding:10px;">
-                    <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{Blog.title}}"</h5> <hr>
-                    <p class="card-text">{{ Blog.content|truncatechars:100 }}</p> <hr>
-                   <div class="d-flex justify-content-end">
-                    {% if Blog.author.profilemodel.image %}
-                    <img src="{{Blog.author.profilemodel.image.url}}" alt="profile" style="height:20px;width:20px;border-radius:50%;">
-                    {% else %}
-                    <img src="{% static 'blog/images/default.png' %}" alt="default png" style="height:20px;width:20px;border-radius:50%;">
-                    {% endif %}
-                    <em><small> &nbsp;By:'{{ Blog.author }}' on {{ Blog.created_at }}</small></em><br>
 
-                   </div>
+    <div class="row sidebarscroll"
+        style="overflow-y:scroll;height:770px;box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+        {% for Blog in posts %}
+        <div class="col-4 mt-3 mb-2 p-3">
+            <div class="card shadow" style="width: 25rem;">
+                {% if Blog.image %}
+                <img src="{{ Blog.image.url }}" class="card-img-top" alt="..." height="200" width="200"
+                    style="object-fit:cover;padding:10px;background-position: center;background-size: cpver;">
+                {% endif %}
+                <div class="card-body" style="padding:10px;">
+                    <h5 class="card-title" style="text-transform:uppercase;color:rgb(63, 192, 231);">"{{Blog.title}}"
+                    </h5>
+                    <hr>
+                    <p class="card-text">{{ Blog.content|truncatechars:100 }}</p>
+                    <hr>
+                    <div class="d-flex justify-content-end">
+                        {% if Blog.author.profilemodel.image %}
+                        <img src="{{Blog.author.profilemodel.image.url}}" alt="profile"
+                            style="height:20px;width:20px;border-radius:50%;">
+                        {% else %}
+                        <img src="{% static 'blog/images/default.png' %}" alt="default png"
+                            style="height:20px;width:20px;border-radius:50%;">
+                        {% endif %}
+                        <em><small> &nbsp;By:'{{ Blog.author }}' on {{ Blog.created_at }}</small></em><br>
+
+                    </div>
                     <div class="like" style="gap:30px;">
                         <span><i class="fa-regular fa-thumbs-up fa-xl mt-3"></i></span>
                         <a href="{% url 'detail-view' Blog.id %}" class="btn btn-sm btn-primary">Read More</a>
                         <a href="#" class="btn btn-sm btn-outline-success">comment</a>
                     </div>
-                    </div>
                 </div>
             </div>
+        </div>
         {% endfor %}
 
     </div>
