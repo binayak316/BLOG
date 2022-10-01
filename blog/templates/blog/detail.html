@@ -11,8 +11,10 @@
           <h3 class="title"style="margin-right:-300px;">{{ Blog.title }}</h3>
         </div>
         <div class="manualnotch d-flex justify-content-end col-4 ">
+          {% if Blog.author == request.user %}
           <span><a href="{% url 'blog-post-edit' Blog.id %}" class="btn btn-sm btn-info mx-2">Edit</a></span>
-          <span><a href="" class="btn btn-sm btn-danger">Delete</a></span>
+          <span><a href="{%url 'blog-post-delete' Blog.id %}" class="btn btn-sm btn-danger">Delete</a></span>
+          {% endif %}
         </div>
       </div>
       {% if Blog.image %}

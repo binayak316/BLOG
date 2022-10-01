@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -89,6 +90,16 @@ def post_edit(request, pk):
         'form':form,
     }
     return render(request, 'blog/post_edit.html', context)
+@login_required(login_url = 'blog-post-delete')
+def post_delete(request, pk):
+    post = BlogModel.objects.get(id=pk)
+    if request.method =='POST':
+        post.delete()
+        return redirect('index')
+    context={
+        'post':post
+    }
+    return render(request, 'blog/post_delete.html',context)
 
 def addblog(request):
     if request.user.is_authenticated:
