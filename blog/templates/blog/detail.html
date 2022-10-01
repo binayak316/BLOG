@@ -6,7 +6,15 @@
 <div class="container-fluid mt-3 conflu" style="padding:100px 300px ;">
   <div class="card text-center">
     <div class="card-header">
-      <h3 class="title">{{ Blog.title }}</h3>
+      <div class="d-flex">
+        <div class="topnotch  justify-content-center col-8" >
+          <h3 class="title"style="margin-right:-300px;">{{ Blog.title }}</h3>
+        </div>
+        <div class="manualnotch d-flex justify-content-end col-4 ">
+          <span><a href="{% url 'blog-post-edit' Blog.id %}" class="btn btn-sm btn-info mx-2">Edit</a></span>
+          <span><a href="" class="btn btn-sm btn-danger">Delete</a></span>
+        </div>
+      </div>
       {% if Blog.image %}
       <img src="{{ Blog.image.url }}" class="card-img-top" alt="..." height="500" width="100"
         style="object-fit:cover;padding:10px;background-position: center;background-repeat: no-repeat;background-size: cover;">

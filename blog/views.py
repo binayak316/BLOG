@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm, BlogModelForm, ProfileModelForm
+from .forms import RegisterForm, BlogModelForm, ProfileModelForm,PostUpdateForm
 from .models import BlogModel, ProfileModel
 from django.contrib.auth.decorators import login_required
 
@@ -74,6 +74,22 @@ def detail(request, pk):
     else:
         return HttpResponseRedirect('/login/')
 
+@login_required(login_url = 'blog-post-edit')
+def post_edit(request, pk):
+    post = BlogModel.objects.get(id=pk)
+    if request.method == "POST":
+        form = PostUpdateForm(request.POST or None, request.FILES or None, instance=post)#instance=post gare error auxa but yesle form lai retrive garxa vaneko edit thichepaxi tyo title (input field ma tehi aunxa_)
+        if form.is_valid():
+            form.save()
+            return redirect('detail-view', pk=post.id)
+    else:
+        form = PostUpdateForm(instance=post)
+    context ={
+        'post':post,  
+        'form':form,
+    }
+    return render(request, 'blog/post_edit.html', context)
+
 def addblog(request):
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -104,3 +120,4 @@ def profile(request):
         'form':form,
     }
     return render(request, 'blog/profile.html',context)
+
