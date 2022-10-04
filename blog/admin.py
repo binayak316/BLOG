@@ -1,5 +1,6 @@
 from django.contrib import admin
 from blog.models import BlogModel, ProfileModel
+from blog.models import Comments
 # Register your models here.
 
 
@@ -11,3 +12,4 @@ class BlogModelAdmin(admin.ModelAdmin):
 
 admin.site.register(BlogModel, BlogModelAdmin)
 admin.site.register(ProfileModel)
+admin.site.register(Comments) 

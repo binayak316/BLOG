@@ -1,6 +1,7 @@
+from unicodedata import name
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import BlogModel, ProfileModel
+from .models import BlogModel, ProfileModel, Comments
 from django import forms
 
 
@@ -28,5 +29,12 @@ class PostUpdateForm(forms.ModelForm):
     class Meta:
         model = BlogModel
         fields = ['title', 'content','image']
+
+class CommentForm(forms.ModelForm):
+    text =forms.CharField(label='',widget=forms.TextInput(attrs={'placeholder':'post a comment','class': "form-control",'style': 'max-width:300px;',}))
+    class Meta:
+        model = Comments
+        fields = ['text']
+
 
       

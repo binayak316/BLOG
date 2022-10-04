@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm, BlogModelForm, ProfileModelForm,PostUpdateForm
+from .forms import RegisterForm, BlogModelForm, ProfileModelForm,PostUpdateForm, CommentForm
 from .models import BlogModel, ProfileModel
 from django.contrib.auth.decorators import login_required
 
@@ -67,9 +67,21 @@ def logoutUser(request):
 
 def detail(request, pk):
     if request.user.is_authenticated:
-        post = BlogModel.objects.filter(id=pk)
+        post = BlogModel.objects.get(id=pk)
+        if request.method == 'POST':
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                instance = comment_form.save(commit=False)
+                instance.user = request.user #user vaneko logged in user
+                instance.post = post
+                instance.save()
+                return redirect('detail-view', post.id)
+         
+        else:
+            comment_form = CommentForm()
         context = {
             'post': post,
+            'comment_form':comment_form,
         }
         return render(request, 'blog/detail.html', context)
     else:

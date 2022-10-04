@@ -1,4 +1,5 @@
 
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.models import User
@@ -27,7 +28,13 @@ class BlogModel(models.Model):
         self.slug = generate_slug(self.title)
         super(BlogModel, self).save(*args, **kwargs)
 
+    def comment_count(self):#comment count garna use gareko method
+        return self.comments_set.all().count()
+    
+    def comments(self): #yo comments uta for comment in post.comments  ma bolaxa
+        return self.comments_set.all()
 
+ 
 # model for the user
 class ProfileModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profilemodel")
@@ -36,3 +43,11 @@ class ProfileModel(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Comments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(BlogModel, on_delete=models.CASCADE)
+    text = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.text
