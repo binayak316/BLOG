@@ -46,6 +46,7 @@
             </form>
           </div>
           {% for comment in post.comments %}  
+          <!-- post vaneko objects in detail function of views.py and comments is the method of models def comments(self) wala-->
           <!-- yo post.comments chai  method of Blogmodels comments(self) vanne method -->
          <div style="border:1px solid rgb(187, 184, 184);border-radius: 10px;padding: 10px;" class="mt-2">
           <p class="text-start" style="border-radius:10px;background-color:lightgray;padding:10px;">
@@ -54,10 +55,11 @@
               <img src="{{comment.user.profilemodel.image.url}}" alt="profile" style="height:30px;width:30px;border-radius:50%;">
               {% else %}
               <img src="{% static 'blog/images/default.png' %}" alt="default png"
-                style="height:40px;width:40px;border-radius:50%;">
+                style="height:40px;width:40px;border-radius:50%;"> 
               {% endif %}
-            </span>
-            <span style="margin-right: 10px;margin-left:10px;">{{ comment.text }}  </span>
+            </span><b>{{ comment.user }}</b><br>
+            
+            <span style="margin-right: 10px;margin-left:10px;">{{ comment.text }} </span>
            </p>
           <div class="d-flex justify-content-center">
             <input type="submit" value="Like" class="btn btn-sm btn-outline-info mx-3 ">
