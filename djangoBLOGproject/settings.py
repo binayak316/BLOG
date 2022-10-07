@@ -137,6 +137,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/' #url dekhine hoo
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'blog/media/')
 
+LOGIN_URL = 'login-user'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

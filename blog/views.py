@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required
 def index(request):
     if request.user.is_authenticated:
         posts = BlogModel.objects.all()
@@ -64,7 +65,7 @@ def logoutUser(request):
     return redirect('login-user')
 
 
-
+@login_required
 def detail(request, pk):
     if request.user.is_authenticated:
         post = BlogModel.objects.get(id=pk)
@@ -112,7 +113,7 @@ def post_delete(request, pk):
         'post':post
     }
     return render(request, 'blog/post_delete.html',context)
-
+@login_required
 def addblog(request):
     if request.user.is_authenticated:
         if request.method == "POST":
