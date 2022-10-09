@@ -1,4 +1,6 @@
+from http.client import HTTPResponse
 from multiprocessing import context
+from pydoc_data.topics import topics
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -8,6 +10,8 @@ from .forms import RegisterForm, BlogModelForm, ProfileModelForm,PostUpdateForm,
 from .models import BlogModel, ProfileModel
 from django.contrib.auth.decorators import login_required
 
+from django.db.models import Q
+
 
 
 
@@ -15,7 +19,12 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def index(request):
     if request.user.is_authenticated:
-        posts = BlogModel.objects.all()
+        search_query = request.GET.get('search','')
+        if search_query:
+            posts = BlogModel.objects.filter(Q(title__icontains=search_query)| Q (content__icontains=search_query))
+        else:
+            posts = BlogModel.objects.all()
+        # posts = BlogModel.objects.all()
         return render(request, 'blog/index.html', {'posts': posts})
     else:
         return HttpResponseRedirect('/login/')
@@ -145,3 +154,14 @@ def profile(request):
     }
     return render(request, 'blog/profile.html',context)
 
+# def search(request):
+#     search_query = request.GET.get('search', '')   
+#     if search_query:
+#         posts = BlogModel.objects.filter(title__icontains=search_query)
+#     else:
+#         posts = BlogModel.objects.all()
+
+#     context={
+#         'posts':posts,
+#     }
+#     return render(request,'blog/search.html', context)

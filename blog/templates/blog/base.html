@@ -37,9 +37,14 @@
           <div class="" style="display:flex;justify-content:space-evenly;gap:10px;">
             <button class="btn btn-sm btn-info"><a href="{%url 'profile' %}" class="text-white"
                 style="text-decoration:none ;">Profile</a></button>
-            <input class="form-control me-2" type="search" placeholder="Search Blog" aria-label="Search">
+            <div class="d-flex">
+              <form method="get" action="{% url 'index' %}">
+                <input class="form-control me-2" type="search" name="search"  placeholder="Search Blog"
+                  aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
             <div class="" style="display:flex;gap:5px;">
-              <button class="btn btn-outline-success" type="submit">Search</button>
               <button class="btn btn-info"><a class="nav-link active text-white  " aria-current="page"
                   href="{% url 'logout-user' %}">logout</a> </button>
             </div>
